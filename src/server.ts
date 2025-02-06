@@ -1,5 +1,6 @@
 import express , { Express } from "express";
 import cors , {CorsOptions} from "cors";
+import morgan from "morgan";
 import colors from "colors";
 import router from "./routes";
 import db from "./config/db";
@@ -41,12 +42,8 @@ const corsOptions : CorsOptions = {
 }
 
 server.use(cors(corsOptions));
+// Habilitar morgan
+server.use(morgan("dev"));
 
 // Routing
 server.use("/api/products",router);
-
-server.get("/api",(req,res) => {
-  res.json({
-    msg: "Welcome to the API"
-  })
-})

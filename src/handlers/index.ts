@@ -28,8 +28,13 @@ export const getProductById = async (req: Request, res: Response) => {
 };
 
 export const registerProduct = async (req: Request, res: Response) => {
+  const {price} = req.body
   try {
-    const product = await Product.create(req.body);
+    const product = await Product.create({
+      ...req.body,
+      price: Number(price)
+    });
+    console.log(product)
     res.status(201).json({ data: product });
   } catch (error) {
     res.status(500).json({ msg: "Error al registrar producto" });
