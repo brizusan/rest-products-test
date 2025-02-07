@@ -5,7 +5,7 @@ import colors from "colors";
 import router from "./routes";
 import db from "./config/db";
 
-export const server : Express = express();
+const server : Express = express();
 
 //Conexion a la base de datos
 export async function connectDB() {
@@ -20,11 +20,9 @@ export async function connectDB() {
 }
 connectDB();
 
-// Habilitar entrada de datos
-server.use(express.json());
 
-// Habilitar cors
 
+// Cors Config
 const allowedOrigins = [process.env.FRONTEND_URL];
 
 if(process.argv[2] === '--postman'){
@@ -41,9 +39,13 @@ const corsOptions : CorsOptions = {
   }
 }
 
+// Habilitar cors
 server.use(cors(corsOptions));
 // Habilitar morgan
 server.use(morgan("dev"));
-
+// Habilitar entrada de datos
+server.use(express.json());
 // Routing
 server.use("/api/products",router);
+
+export default server;

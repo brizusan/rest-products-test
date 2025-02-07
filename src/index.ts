@@ -1,5 +1,5 @@
-import {server} from "../src/server"
 import colors from "colors"
+import server from "./server"
 
 const PORT = process.env.PORT || 4000
 
